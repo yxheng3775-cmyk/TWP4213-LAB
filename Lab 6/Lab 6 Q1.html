@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Calculate Total Price</title></head>
+<body>
+<h1>Calculate Total Price</h1>
+<form method="get" action="#">
+<p><input id="qty" type="number" placeholder="Quantity"></p>
+<p><input id="price" type="number" placeholder="Price per item"></p>
+<button id="calc">Calculate</button>
+</form>
+<p id="totalPrice"></p>
+<script>
+    const btnCalc = document.getElementById("calc");
+    btnCalc.addEventListener("click", function () {
+
+    const qty = Number(document.getElementById('qty').value);
+    const price = Number (document.getElementById('price').value);
+    
+    if(qty == "" || price == ""){
+       alert("Please enter a value!");
+       return;
+    }
+
+    else if(qty < 0 || price < 0){
+       alert("Please enter a positive number")
+       return;
+    }
+    else{
+        let total = qty * price
+    
+    document.getElementById('totalPrice').textContent = 
+    `Total: RM ${total.toFixed(2)}`;
+
+    }
+    }) 
+</script>
+</body>
+</html>

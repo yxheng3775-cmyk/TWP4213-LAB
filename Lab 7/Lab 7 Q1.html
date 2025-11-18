@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+    <style>
+      label {
+        font-weight: 600;
+        color: #374151;
+        margin: 8px 0px;
+        display: block;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Edit Profile</h2>
+      <form method="POST" action="submit_profile_edit.php" id="editProfileForm">
+        <label>First Name</label>
+        <input type="text" name="first_name"  />
+        <label>Contact Number</label>
+        <input type="tel" name="contact"  />
+        <label>Address</label>
+        <input type="text" name="address"  />
+        <label>Postcode</label>
+        <input type="text" name="postcode" id="postcode" />
+        <label>City</label>
+        <input type="text" name="city"  />
+        <label>State</label>
+        <select name="State" id="stateSelect">
+          <option value="" selected>Select your state</option>
+        </select>
+
+        <div class="form-actions">
+          <br />
+          <button type="submit" class="save-btn">Save</button>
+          <button type="reset" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+ 
+  <script>
+    // JavaScript to dynamically populate the state dropdown
+   malaysianStates = [
+      "Johor",
+      "Kedah",
+      "Kelantan",
+      "Malacca",
+      "Negeri Sembilan",
+      "Pahang",
+      "Penang",
+      "Perak",
+      "Pulau Pinang",
+      "Sabah",
+      "Sarawak",
+      "Selangor",
+      "Terengganu",
+      "Wilayah Persekutuan Kuala Lumpur",
+      "Wilayah Persekutuan Labuan",
+      "Wilayah Persekutuan Putrajaya"
+      ];
+
+    const stateSelect = document.getElementById("stateSelect");
+
+    malaysianStates.forEach((state) => { 
+    const option = document.createElement("option"); 
+    option.value = state; 
+    option.textContent = state; 
+    stateSelect.appendChild(option); 
+    });
+   
+   const form = document.querySelector("#editProfileForm");
+   
+   form.addEventListener('submit', function(e) {
+   const fname = document.querySelector("[name='first_name']");
+   const contact = document.querySelector("[name='contact']");
+   const address = document.querySelector("[name='address']");
+   const postcode = document.querySelector("[name='postcode']");
+   const city = document.querySelector("[name='city']");
+   const stateSelect = document.getElementById("stateSelect");
+   const savebtn = document.querySelector(".save-btn");
+   const cancelbtn = document.querySelector(".cancel-btn");
+   
+
+  if (fname.value == "") { 
+    alert("Please enter your first name."); 
+    e.preventDefault(); 
+  }
+
+  if (contact.value == "") { 
+    alert("Please enter your contact number."); 
+    e.preventDefault(); 
+    return; 
+  }
+
+  if (address.value == "") { 
+    alert("Please enter your address."); 
+    e.preventDefault(); 
+    return; 
+  }
+
+  if (postcode.value == "") { 
+    alert("Please enter your postcode."); 
+    e.preventDefault(); 
+    return; 
+  } 
+
+  if (city.value == "") { 
+    alert("Please enter your city."); 
+    e.preventDefault(); 
+    return; 
+  }
+
+  if (stateSelect.selectedIndex == 0) { 
+    alert("Please select a state"); 
+    e.preventDefault(); 
+    return; 
+  }
+
+  const contactPattern = /^0\d{9,10}$/; 
+     if (!contactPattern.test(contact.value)) { 
+      alert("Please enter a valid contact number."); 
+      e.preventDefault(); 
+      return; 
+    }
+
+    const postcodePattern = /^\d{5}$/;
+    if (!postcodePattern.test(postcode.value)) { 
+      alert("Please enter a valid 5-digit postcode."); 
+      e.preventDefault(); 
+      return; 
+    }
+    if (city.value == "") { 
+      alert("Please enter your city."); 
+      e.preventDefault(); 
+      return; 
+    }
+
+    if(stateSelect.selectedIndex == 0) { 
+      alert("Please select a state"); 
+      e.preventDefault(); 
+      return; 
+    }
+  });
+
+  </script>
+  </body>
+</html>

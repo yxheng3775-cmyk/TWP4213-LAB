@@ -1,0 +1,43 @@
+:root{
+      --border-radius:10px;
+      --main-color:#ffa100;
+      --font-color:white;
+      --box-shaddow:0 4px 12px rgba(0,0,0,0.03);
+    }
+    
+    
+    /* sidebar */
+
+    .sidebar .nav-link{
+      font-weight:500;
+      color:var(--main-color);
+    }
+
+    .sidebar{
+      min-height:100vh;
+      background-color: white;
+      
+      transition:all 0.3s;
+    }
+
+    .nav-link{
+      font-size:18px;
+    }
+
+    .nav-link:hover{
+      background-color:var(--main-color);
+      color:var(--font-color);
+    }
+
+    .img-logo{
+      width:40px;
+      height:auto;
+      margin: 20px 10px 0 0;
+
+    }
+
+    .img-logo_name{
+      width:auto;
+      height:20px;
+      margin:20px 10px 10px 0;
+    }

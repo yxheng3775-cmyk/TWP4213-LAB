@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration</title>
+</head>
+<body>
+    <h2>Register a New Account</h2>
+    <form method="post" action="register.php">
+     <fieldset>
+      <legend>Personal Details</legend>
+       <p>
+          <label>Full name: </label>
+          <input type="text" id="fullname" name="name" placeholder="Enter your full name" maxlength="55" size="60" style="width:60ch;">
+       </p>
+       <p>
+          <label>Password: </label><br>
+          <input type="password" id="password" name="password" required maxlength="12" size="15" style="width:15ch;">
+       </p>
+       <p>
+          <label>Email Address: </label><br>
+          <input type="email" name="email" required placeholder="example@email.com">
+       </p>
+       <p>
+          <label>Your Birthday: </label><br>
+          <input type="date" id="birthday" name="birthday" max="2007-11-25" min="1900-01-01" title="You must be at least 18 years old">
+          <br>
+          <small>Must be at least 18 years old</small>
+       </p> 
+     </fieldset>
+     <fieldset>
+      <legend>Account Type</legend>
+      <input type="radio"  value="1"> Customer<br/>
+       <input type="radio" value="2"> Seller<br/>
+       <p><label>If you are a Seller, describe your business:</label>
+       <textarea placeholder="Briefly describe your business"rows="4" cols="50"></textarea></p>
+      </fieldset>
+      <fieldset>
+        <legend>How did you hear about us?</legend>
+            <input type="checkbox" name="About" value="searh engine"> Search Engine</br>
+            <input type="checkbox" name="About" value="facebook"> Facebook</br>
+            <input type="checkbox" name="About" value="friends"> Friends</br>
+            <input type="checkbox" name="About" value="others"> Others
+      </fieldset>
+      <p><input type="submit" value="Register Account"/>
+         <input type="reset" value="Clear"/></p>
+       
+   </form>
+   <footer></footer>
+</body>
+</html>

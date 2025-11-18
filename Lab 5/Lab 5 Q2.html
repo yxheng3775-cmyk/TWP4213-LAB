@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+<style>
+
+    /* CSS VARIABLE(Global Color & Fonts)*/
+    :root {
+    --bg-main: #F5DEB3;
+    --bg-header: #dab395;
+    --brand-brown: #8b4a1c;
+    --btn-submit: #4a90e2;
+    --btn-submit-hover: #3a78c2;
+    --btn-clear: #999;
+    --btn-clear-hover: #777;
+    --font-main: Arial, sans-serif;
+   }   
+
+   body {
+        font-family: var(--font-main);
+        background-color: var(--bg-main);
+        margin: 0;
+        padding-top: 120px;
+        text-align: left;
+        /*Background image with transparency overlay*/
+        background-image: linear-gradient(rgba(245,222,179,0.7), rgba(245,222,179,0.7)), url("img/background.png");
+        background-size: cover; 
+        background-repeat: no-repeat; /*Prevent image repetition*/
+        background-position: center; /*Center the image*/
+    }
+
+    header{
+        width:100%;     /*Full width*/
+        background-color: var(--bg-header);
+        position: fixed;       /*Fix header at top*/
+        padding:8px;
+        top: 0;
+        left: 0;  
+        z-index: 1000;       /*Ensure header is above other content*/
+        display: flex;                   
+        align-items: center;     /*Vertical center*/
+        justify-content: space-between;  /*Space between left and right*/    
+        height: 90px;
+    }
+
+    /*Font for logo*/
+   @font-face {
+            font-family:Chocolate;
+            src: url("font/Chocolate.ttf");
+    }
+
+    .header-container {
+        font-family: 'Chocolate';
+        font-size: 32px;
+        color: var(--brand-brown);
+        display: flex;
+        align-items: center;
+        gap: 8px;    /*Space between logo and text*/
+    }
+
+    /*Logo image*/
+    .logo {
+        height: 60px;                 
+        object-fit: contain;
+    }
+
+    /*Navigation bar*/
+    .navbar {  
+       flex: 1;  
+       display: flex;    
+       align-items: center;  
+       justify-content: center;
+    }
+
+    .nav-links {
+        list-style: none;  /*Remove bullets*/
+        display: flex;
+        gap: 30px;   /*Space between links*/
+        margin: 0;
+        padding: 0;
+   }
+
+    .nav-links li a {
+        color: white;
+        text-decoration: none;    /*Remove underline*/
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    /*Search + Cart container*/
+    .search-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    white-space: nowrap;
+    }
+
+    /*Search input box*/
+    .search-input {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }   
+
+    .search-button{
+       background-color: var(--brand-brown);
+       color: white;
+       border: none;
+       padding: 8px 12px;
+       cursor: pointer;
+    }
+
+    /*Shopping cart button*/
+    .cart-icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+        margin-right: 2vw;
+    }
+
+    /*Cart image*/
+    .cart-icon-btn img {
+        height: auto;
+        width: 35px;
+        object-fit: contain;
+    }
+    
+    /*Form design*/
+    form {
+       background: #fff8ee;
+       padding: 40px 50px;
+       border-radius: 16px;       
+       border: 1px solid #ddd;
+       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       margin: 0 auto;      /*Center form*/
+       max-width: 960px;    /*Limit width*/
+    }
+
+    /*form section box*/
+    fieldset {
+        border: 2px solid #d9b89a;
+        border-radius: 10px;
+        padding: 2vh 3vw;
+    }
+
+    legend {
+        font-size: 35px;
+        font-weight: bold;
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0;
+        color:blue;  
+    }
+
+    label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .input{
+        font-family: inherit;
+    }
+
+    .input-box {
+        width: 100%;
+        padding: 12px 14px;
+        margin-top: 6px;
+        border-radius: 8px;
+        border: 1px solid #aaa;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Highlight input box on focus */
+    .input-box:focus {
+        border-color: var(--btn-submit-hover);
+        outline: none;
+    }
+
+    /*Phone number*/
+    .phone-group {
+        display: flex;
+        gap: 1vw;    
+   }
+
+    /*Country code dropdown*/
+    .phone-group select {
+        padding: 1vh 1vw;
+        border: 0.1vw solid #aaa;
+        border-radius: 0.6vw;
+        font-size: 14px;
+        width: 80px; 
+    }
+
+    .phone-group input {
+       padding: 1vh 1vw;
+       border: 0.1vw solid #aaa;
+       border-radius: 0.6vw;
+       font-size: 14px;
+    }
+
+    .note {
+        font-size: 13px;
+        color: #555;
+    }
+
+    /*Gender radio buttons*/
+    .gender-group {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .gender-group label {
+        font-weight: normal;
+    }
+
+    /*Buttons(submit/clear)*/
+    .btn{
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+      .btn-submit {
+        background-color: var(--btn-submit);
+        color: white;
+      }
+
+      .btn-submit:hover {
+        background-color: var(--btn-submit-hover);
+      }
+
+      .btn-clear {
+         background-color: var(--btn-clear);
+         color: white;
+       }
+
+        .btn-clear:hover {
+          background-color: var(--btn-clear-hover);
+        }
+
+       /*checkbox*/
+        #terms {                     
+           accent-color: #4a90e2; 
+        }
+
+    .icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fafafa;
+        color: black;
+        gap: 10px;  /*Space between icon and text*/
+        width: 280px;  /*Button width*/
+        border: 2px solid #ccc;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 20px auto;
+    }
+
+    .icon-btn img {
+        height : 30px;
+        width: 30px;
+        object-fit: contain;
+    }
+
+    .icon-btn:hover {
+        background-color: #e0e0e0;
+    }
+
+    /*Horizontal line divider*/
+    hr {
+    height: 2.5px;       
+    background-color: #00000035; 
+    border: none; 
+    }
+
+    .text{
+        text-align: center;
+    }
+
+     /*Footer*/
+    footer {
+        background-color: black;
+        color: white;
+        text-align: left; 
+        font-family: var(--font-main);
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 40px 10px;
+        column-gap: 80px; /*Spacing between left and right panel*/
+        row-gap: 10px; /*Vertical spacing between blocks after line breaks*/
+    }
+
+    .footer-heading {
+    font-size: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    }
+
+    .footer-social{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;  /*Spacing between each element*/
+    }
+
+    .footer-social img{
+    width: 22px;
+    height: auto;
+    vertical-align: middle;
+    }
+
+    .footer-links{
+    list-style: none;
+    padding: 0;
+    margin-bottom: 12px;
+    }
+
+    .footer-links a{
+    color: lightgrey;
+    text-decoration: none;
+    font-size: 15px;
+    }
+
+   .footer-copyright{
+    width: 100%;
+    text-align: center;
+    padding-top: 2px;
+    margin-top: 2px;
+    border-top: 1px solid darkgrey;
+    font-size: 0.9rem;
+    }
+
+/*---------------------------------------*/   
+        /*Moble Responsive*/
+/*---------------------------------------*/
+    @media(max-width:768px){
+        
+    header {
+        flex-wrap: wrap;    
+        height: auto;
+        padding: 2vw;
+        
+    }
+
+    .header-container {
+        gap: 2vw;
+        font-size: 1.1rem;
+        max-width: 45%;
+    }
+
+    .logo {
+        height: 8vh;
+    }
+
+    
+    .nav-links {
+        gap: 4vw;
+    }
+
+    .nav-links li a {
+        font-size: 1.1rem;
+    }
+
+    .search-box {
+        width: 100%;
+        justify-content: flex-end;
+        padding-right: 4vw;
+    }
+  
+    .search-input {
+        font-size: 1rem;
+        padding: 1.5vh 2vw;
+        width: 35vw;  
+    }
+
+    .search-button {
+        padding: 1.5vh 3vw;
+        font-size: 3.5vw;
+    }
+ 
+    .cart-icon-btn img {
+        width: 28px;
+    }
+
+    form {
+        margin-top: 18vh;
+        margin-left: 8vw;
+        margin-right: 8vw;
+        padding: 4vh 3vw;
+        border-radius: 3vw;
+    }
+
+    .note {
+        font-size: 2vw;
+    }
+
+     .input-box {
+        font-size: 1.1rem;
+        padding: 14px 16px;
+        border-radius: 2.5vw;
+    }
+
+    .phone-group select {
+        font-size: 1rem;
+        width: 80px;         
+        padding: 0.8rem 1rem;
+        border-radius: 2.5vw;
+    }
+
+    .phone-group input {
+        font-size: 1rem;
+        width: 100%;         
+        padding: 1.5vh 3vw;
+        border-radius: 2.5vw;
+    } 
+
+    footer {
+        flex-direction: column; 
+        align-items: flex-start; /*left-align*/
+        padding: 20px;  
+        column-gap: 0;
+        row-gap: 20px;
+    }
+
+    .footer-heading {
+        font-size: 22px; 
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        font-size: 14px; 
+    }
+
+    .footer-social img {
+        width: 20px; 
+    }
+
+    .footer-copyright {
+        margin-top: 20px;
+        font-size: 0.8rem;
+        text-align: center;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+      <div class="header-container">
+          <img src="img/bakery.png" class="logo" alt="SoftyBear Bakery Logo"/>
+            <h1 class="store-name">SoftyBear Bakery</h1>    
+      </div>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="C_Home.php">Home</a></li>
+          <li><a href="C_Products.php">Products</a></li>
+        </ul>
+    </nav>
+
+     <div class="search-box">
+       <input type="text" name="search"placeholder="Search for bread..." class="search-input"/>
+       <button type="submit" class="search-button"> Search </button>
+     
+       <button type="button" class="cart-icon-btn">
+        <img src="img/shopping-cart.png" alt="Shopping Cart"/>
+      </button>
+    </div>
+    </header>
+
+    <form method="post" action="">
+        <fieldset>
+        <legend>Sign up your account</legend><br>
+        
+            <label>Username: </label> <br>
+            <input type="text" id="username" name="name" class="input-box" placeholder="Enter your username" maxlength="25">
+
+        <p>
+            <label>Email: </label> <br>
+            <input type="email" name="email" required class="input-box" placeholder="example@email.com" maxlength="25">
+        </p>
+
+        <p>
+            <label>Password: </label> <br>
+            <input type="password" id="password" name="password" required class="input-box" maxlength="15"><br>
+            <small class="note">Password must be at least 12 characters, including uppercase, lowercase, a number and a special character.</small>
+        </p>
+
+        <p>
+            <label>Confirm Password: </label> <br>
+            <input type="password" id="confirm_password" name="confirm_password" required placeholder="Re-enter your password" class="input-box" maxlength="15" size="15">
+        </p> 
+        
+        <p>
+            <label>Phone number: </label><br>
+            <div class="phone-group">
+            <select id="country-code" name="country-code" required>
+              <option value="+60">+60 (Malaysia)</option>
+              <option value="+65">+65 (Singapore)</option>
+              <option value="+86">+86 (China)</option>
+              <option value="+852">+852 (Hong Kong)</option>
+              <option value="+81">+81 (Japan)</option>
+              <option value="+1">+1 (USA)</option>
+            </select>
+            <input type="text" id="phone" name="phone" maxlength="15" placeholder="123456789">
+            </div>
+        </p>
+        
+        <p>
+          <label>Your Birthday: </label><br>
+          <input type="date" id="birthday" name="birthday" min="1900-01-01" class="input-box">
+        </p>
+        
+        <div class="gender-group">
+            <label>Gender:</label><br>
+            <label><input type="radio" id="male" name="gender" value="male"> Male</label><br>
+            <label><input type="radio" id="female" name="gender" value="female"> Female</label>
+        </div>
+
+        <p>
+            <input type="checkbox" id="terms" name="terms" required>
+            <label>I agree to the Terms & Conditions.</label>
+        </p>
+    </fieldset>
+        <p>
+            <input type="submit" value="Sign Up" class="btn btn-submit"/>
+            <input type="reset" value="Clear" class="btn btn-clear"/>
+        </p>
+        
+    </form>
+
+    <button type="button" class="icon-btn">
+        <img src="img/Google_Favicon_2025.svg.png" alt="Google account"/>
+        Sign up with Google 
+    </button>
+    <button type="button" class="icon-btn">
+        <img src="img/facebook.png" alt="Facebook account"/>
+        Sign up with Facebook
+    </button>
+   <button type="button" class="icon-btn">
+        <img src="img/email.jpg" alt="Email account"/>
+        Sign up with Email
+    </button>
+    <hr>
+
+    <p class="text">Already have an account? <a href="#">Sign in</a></p>
+
+<footer>
+    <div class="footer-links">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="C_About_Us.php">About Us</a></li>
+            <li><a href="C_FAQ.php">FAQ</a></li>
+            <li><a href="C_Order_History.php">Order History</a></li>
+            <li><a href="C_Location.php">Location</a></li>
+            <li><a href="C_Terms.php">Terms & Conditions</a></li>
+          </ul>
+    </div>
+    <div class="footer-connect">
+        <h3 class="footer-heading">Connect With Us</h3>
+        <p class="footer-social">
+           <img src="img/whatsapp.png" width="22" alt="WhatsApp"/>
+           +6012 345 6789
+        </p>
+
+        <p class="footer-social">
+           <img src="img/fblogo.png" width="22" alt="Facebook"/>
+           Facebook
+        </p>
+
+        <p class="footer-social">
+           <img src="img/instalogo.png" width="22" alt="Instagram"/>
+           Instagram
+        </p>
+    </div>
+    <div class="footer-copyright">
+        <p>&copy; 2025 SoftyBear Bakery. All Rights Reserved. |
+          <a href="#">Privacy Policy</a>|
+          <a href="#">Terms of Service</a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>

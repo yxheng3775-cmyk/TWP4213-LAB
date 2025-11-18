@@ -1,0 +1,249 @@
+:root {
+    --main-orange: #ffa100;
+    --primary-color: #3f57f4;
+    --form-text-color: #333;
+    --body-bg: #f8f9fa;
+    --form-border-width: 1px;
+    --form-border-color: #ddd;
+    --form-border-radius: 12px;
+    --shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Page layout */
+.form {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px; /* top and bottom padding */
+}
+
+/*Left and Right container layout */
+.main-container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background: white;
+    border-radius: var(--form-border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* Left:Welcome area with background image */
+.form-content {
+    flex: 1;
+    /* Overlay semi-transparent color to ensure text clarity */
+    background-image: linear-gradient(rgba(255, 140, 0, 0.6), rgba(255, 140, 0, 0.6)), url("img/bookstore.png!w700wp");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: scroll; /* Prevent background fixed */
+    padding: 60px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-welcome h2 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Enhance text readability on background */
+}
+
+.login-welcome p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.95;
+}
+
+.login-welcome ul {
+    list-style: none;
+    padding: 0;
+}
+
+.login-welcome ul li {
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.15); /* blur glass background */
+    border-radius: 10px;
+    font-size: 14px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Right: Pure white login form area */
+.form-container {
+    flex: 1.2; /* Slightly wider for form */
+    padding: 60px;
+    background: #fff;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+/* Logo size */
+.form-container .logo {
+    width: 220px;
+    height: auto;
+    margin-bottom: 15px; /* Space between logo and title */
+}
+
+.form-header h1 {
+    font-size: 28px;
+    color: var(--form-text-color);
+    margin: 0 0 10px 0; /* Space below title */
+}
+
+/* Error message hint */
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: block;
+    margin-top: 10px; /* Space above error message */
+    border: 1px solid #f5c6cb;
+    border-left: 5px solid #f56565; /* Highlight left border */
+    animation:fadeIn 0.5s ease-in-out; /* Smooth fade-in effect */
+}
+
+/* form internal element design */
+.login-form {
+    display: flex; 
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Space between form groups */
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px; /* Space below label */
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Form input fields */
+.login-form .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+    border: var(--form-border-width) solid var(--form-border-color);
+    border-radius: var(--form-border-radius);
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    transition: all 0.3s ease; /* Smooth focus transition */
+}
+
+.login-form .form-control:focus {
+    outline: none; /* Remove default outline */
+    border-color: var(--main-orange);
+    box-shadow: 0 0 0 4px rgba(255, 161, 0, 0.15);
+}
+
+/* Forgot password */
+.forgot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    color: var(--main-orange);
+    text-decoration: underline;
+}
+
+/* Login button */
+.login-form [type=submit] {
+    background-color: var(--main-orange);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--form-border-radius);
+    cursor: pointer;
+    margin-top: 10px;  /* Space above button */
+}
+
+/* Login button hover effect */
+.login-form [type=submit]:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-1px);  /* Slight lift effect */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Divider line */
+.divider {
+    text-align: center;
+    margin: 10px 0;
+    position: relative; /* For positioning the line */
+}
+/* Horizontal line */
+.divider::before {
+    content: "";  /* Empty content for the line */
+    position: absolute;   /* Position absolutely within the divider */
+    top: 50%; left: 0; right: 0;  
+    height: 1px;
+    background: #eee;
+    z-index: 1; /* Ensure it sits below the text */
+}
+
+.divider span {
+    background: #fff;
+    padding: 0 15px;  /* Space around text */
+    color: #bbb;
+    font-size: 14px;
+    position: relative; /* Ensure it sits above the line */
+    z-index: 2;
+}
+
+.register-link {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+.register-link a {
+    color: var(--main-orange);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        margin: 20px;
+    }
+    .form-content {
+        padding: 40px;
+    }
+    .form-container {
+        padding: 40px 25px;
+    }
+}

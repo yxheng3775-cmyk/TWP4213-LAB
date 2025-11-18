@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Best Sellers Report</title>
+</head>
+<body>
+    <h3>Best Sellers</h3>  
+    <p>Search reports based on the following criteria.</p>
+    <hr>
+    <form method="get" action=" ">
+       <p>
+          <label>Start Date: </label>
+          <input type="date" name="start_date">
+       </p>
+       <p>
+          <label>End Date: </label>
+            <input type="date" name="end_date">
+       </p>
+       <p>
+          <label>Order Status: </label>
+            <select name="order_status">
+               <option>All</option>
+               <option>Pending</option>
+               <option>Processing</option>
+               <option>Complete</option>
+               <option>Cancelled</option>
+            </select>
+       </p>
+       <p>
+          <label>Payment Status:</label><br>
+            <select multiple="payment_status" size="6">
+               <option>Pending</option>
+               <option>Authorized</option>
+               <option>Paid</option>
+               <option>Partially</option>
+               <option>Refunded</option>
+               <option>Voided</option>
+        </select>
+        </p>
+    <p><input type="submit" value="RUN REPORT"/></p>
+    </form>
+   <footer></footer>
+</body>
+</html>

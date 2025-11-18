@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery Checkout</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        th,
+        td {
+            padding: 6px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .price,
+        .subtotal {
+            text-align: right;
+        }
+
+        button {
+            margin: 5px;
+            padding: 6px 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Your Cart</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Item</th>
+                <th class="price">Price</th>
+                <th>Qty</th>
+                <th class="subtotal">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="cart">
+            <tr data-price="6.9">
+                <td><input type="checkbox"></td>
+                <td>Fragrant Rice 1kg</td>
+                <td class="price">RM6.90</td>
+                <td><input type="number" value="1" min="1"></td>
+                <td class="subtotal">RM6.90</td>
+            </tr>
+            <tr data-price="12.5">
+                <td><input type="checkbox"></td>
+                <td>Fresh Chicken 1kg</td>
+                <td class="price">RM12.50</td>
+                <td><input type="number" value="2" min="1"></td>
+                <td class="subtotal">RM25.00</td>
+            </tr>
+            <tr data-price="4.2">
+                <td><input type="checkbox"></td>
+                <td>Grade B Eggs (10)</td>
+                <td class="price">RM4.20</td>
+                <td><input type="number" value="1" min="1"></td>
+                <td class="subtotal">RM4.20</td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="remove">Remove Selected</button>
+    <button id="update">Update Quantities</button>
+    <div id="summary">
+        <p>Subtotal: <span id="subtotal">RM0.00</span></p>
+        <p>Delivery: <span id="delivery">RM0.00</span></p>
+        <p><strong>Total: <span id="total">RM0.00</span></strong></p>
+    </div>
+    <hr>
+    <h2>Payment</h2>
+    <label><input type="radio" name="pay" value="fpx"> FPX</label>
+    <label><input type="radio" name="pay" value="ewallet"> eWallet</label>
+    <label><input type="radio" name="pay" value="duitnow"> DuitNow QR</label>
+    <label><input type="radio" name="pay" value="card"> Credit/Debit Card</label>
+    <br><label><input type="checkbox" id="agree"> I agree to Terms</label>
+    <div id="msg" class="error" style="display:none;"></div>
+    <button type="submit" id="pay">Pay Now</button>
+
+    <script>
+        const checkPriceBtn = document.querySelector('#pay');
+        const formatMYR = new Intl.NumberFormat('ms-MY', {
+        style: 'currency',
+        currency: 'MYR'
+    });
+
+    const msg = document.getElementById('msg');
+
+    function showErr(text) {
+      msg.style.display = 'block';
+      msg.textContent = text;
+    }
+
+    function hideErr() {
+      msg.style.display = 'none';
+      msg.textContent = '';
+    }
+
+
+    function calc() {
+    let sub = 0;
+    const items = document.querySelectorAll('#cart tr');
+    items.forEach(item => {
+    let price = Number(item.dataset.price);
+    let qty = Number(item.querySelector('input[type=number]').value);
+    item.querySelector('.subtotal').textContent =formatMYR.format(price * qty);
+    sub += price * qty;
+    });
+    // Delivery rule: Free if subtotal ≥ RM50, else RM5 (only if cart not empty)
+    let dlvry = sub >= 50 ? 0 : 5;
+    document.getElementById('subtotal').textContent = formatMYR.format(sub);
+    document.getElementById('delivery').textContent = formatMYR.format(dlvry);
+    document.getElementById('total').textContent = formatMYR.format(sub + dlvry); }
+    calc();
+
+    const remove = document.querySelector('#remove');
+
+    remove.onclick = () => {
+    let c = document.querySelectorAll('#cart input[type=checkbox]:checked');
+
+    if (!c.length) {
+    showErr('No items selected');
+    return;
+    }
+
+    c.forEach(x => x.closest('tr').remove());
+    calc();
+  };
+
+
+   const update = document.querySelector('#update');
+
+   update.onclick = () => {
+   hideErr();
+
+   const qtyInputs = document.querySelectorAll('#cart input[type="number"]');
+
+   for (let q of qtyInputs) {
+   if (q.value === '' || Number(q.value) <= 0 || isNaN(q.value)) {
+      showErr('Quantity must be a number greater than 0');
+      return;
+    }
+   }
+   calc();
+   };
+
+
+   const pay = document.querySelector('#pay');
+
+   pay.onclick = () => {
+   hideErr();
+
+   // 1. payment selected
+   const payMethod = document.querySelectorAll('input[name="pay"]:checked');
+   if (!payMethod.length) {
+     return showErr('Please select a payment method');
+   }
+
+   // 2. cart not empty
+   if (!document.querySelectorAll('#cart tr').length) {
+     return showErr('Cart is empty');
+   }
+
+  // 3. terms agreed
+   if (!document.getElementById('agree').checked) {
+     return showErr('You must agree to the terms');
+   }
+
+    alert('Payment successful (demo)');
+  };
+
+
+    </script>
+</body>
+
+</html>
